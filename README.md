@@ -50,9 +50,31 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Can you explain exception handling in your application?
+
+Exceptions are anything outside the normal flow of operations. 
+We created custom resourceNotFound and resourceFound exceptions with only needed data return to the client for security purposes.
+We first turn off the default exceptions in spring through the application properties, then set up the models for the validation error and error details.
+Then we implement a helperFuntion service to relay the errors to the controller.
+Afterwords we set up a custom errordetails class that just brings in the default settings,
+then we set up each indvidual exeption how we would like it.
+
+
 2. Can you explain your user authentication flow?
+
+First the client is authorized to the backend using either a CLIENTID + CLIENTSECRET or a base64 encoded token with the CLIENTID + SECRET in it.
+Then after the client is authorized, the system checks for a valid username/password combo, if it is correct it will return an Authentication Token which must be sent 
+with each request, where user authentication applies. Afterwords when a client logsout the Token is removed from the TokenStore making the token invalid.
+
+
 3. Can you show me your unit tests and describe how they work?
+yes, the service test uses the database to test each unit using the services, very much like it would in production,
+the controller test mocks the database and mocks each unit to simulate working with the database. 
+
 4. Can you show how you deployed your application to a cloud service with a persistent database?
+yes I set up the needed plugins/dependancies and finalName, in application properties I set up the local.run.db variable to either be POSTGRESQL or H2.
+From there you set up the datasource configuration class to set the appropriate setting depening the the local.run.db value.
+Then using the HerokuCLI I created a new application with a name that matches the finalName, set the enviroment variables in Heroku to the needed CLIENTID and CLIENTSECRET.
+And finally using the Heroku plugin for IntelliJ I deployed the project to Heroku.
 
 ## Instructions
 

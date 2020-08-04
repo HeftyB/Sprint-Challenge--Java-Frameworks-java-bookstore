@@ -18,4 +18,6 @@ public interface BookService
                 long id);
 
     void deleteAll();
+    Book findByTitle(String title);
+
 }
